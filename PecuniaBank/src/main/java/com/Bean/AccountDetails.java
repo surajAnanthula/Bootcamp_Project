@@ -1,20 +1,17 @@
 package com.Bean;
 
-import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Account")
 public class AccountDetails {
-	@Id   //primary
+	@Id   //primary Key
 	@Column(length=12)  //length of column      
 	private long accountId;
 	@Column(length=15)
@@ -26,9 +23,7 @@ public class AccountDetails {
 	@Column
 	private Date lastTransaction;
 	
-	 @OneToMany(mappedBy = "Account", fetch = FetchType.LAZY,
-	            cascade = CascadeType.ALL)
-	    private Set<Transactions> transactions;
+	
 	public long getAccountId() {
 		return accountId;
 	}

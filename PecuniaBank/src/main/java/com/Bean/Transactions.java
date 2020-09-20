@@ -1,13 +1,16 @@
 package com.Bean;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,13 +29,16 @@ public class Transactions {
 	private String transFrom;
 	@Column
 	private String transTo;
-	@Column
+	@Column(length=12) 
 	private long accountId;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "accountId", nullable = false)
-	private AccountDetails accountdetails;
-	
+
+	/*
+	 * @OneToMany(mappedBy = "Account", fetch = FetchType.LAZY, cascade =
+	 * CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "accountId", nullable = false) private AccountDetails
+	 * accountdetails;
+	 */
 	public Transactions() {
 		
 	}
@@ -47,7 +53,7 @@ public class Transactions {
 		this.transFrom = transFrom;
 		this.transTo = transTo;
 		this.accountId = accountId;
-		this.accountdetails = accountdetails;
+		//this.accountdetails = accountdetails;
 	}
 	
 	

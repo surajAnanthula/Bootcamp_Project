@@ -3,13 +3,13 @@ package com.Dao;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+//import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.Bean.Transactions;
 
 
-public interface PassbookDao extends JpaRepository<Transactions, Long>{
+public interface PassbookDao{
 
 	List<Transactions> fetch(long accountId);
 	
