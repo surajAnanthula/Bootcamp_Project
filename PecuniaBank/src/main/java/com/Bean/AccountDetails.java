@@ -1,8 +1,14 @@
 package com.Bean;
 
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,6 +17,18 @@ public class AccountDetails {
 	@Id   //primary
 	@Column(length=12)  //length of column      
 	private long accountId;
+	@Column(length=15)
+	private String branch;
+	@Column(length=15)
+	private String accountType;
+	@Column(length=8)
+	private long amount;
+	@Column
+	private Date lastTransaction;
+	
+	 @OneToMany(mappedBy = "Account", fetch = FetchType.LAZY,
+	            cascade = CascadeType.ALL)
+	    private Set<Transactions> transactions;
 	public long getAccountId() {
 		return accountId;
 	}
@@ -35,19 +53,21 @@ public class AccountDetails {
 	public void setAmount(long amount) {
 		this.amount = amount;
 	}
-	public int getLastTransaction() {
+	public Date getLastTransaction() {
 		return lastTransaction;
 	}
-	public void setLastTransaction(int lastTransaction) {
+	public void setLastTransaction(Date lastTransaction) {
 		this.lastTransaction = lastTransaction;
 	}
-	@Column(length=15)
-	private String branch;
-	@Column(length=15)
-	private String accountType;
-	@Column(length=8)
-	private long amount;
-	@Column
-	private int lastTransaction;
+	public AccountDetails(long accountId, String branch, String accountType, long amount, Date lastTransaction) {
+		super();
+		this.accountId = accountId;
+		this.branch = branch;
+		this.accountType = accountType;
+		this.amount = amount;
+		this.lastTransaction = lastTransaction;
+	}
+	
+	
 
 }

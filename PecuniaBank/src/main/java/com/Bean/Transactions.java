@@ -4,7 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,38 @@ public class Transactions {
 	private String transFrom;
 	@Column
 	private String transTo;
+	@Column
+	private long accountId;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "accountId", nullable = false)
+	private AccountDetails accountdetails;
+	
+	public Transactions() {
+		
+	}
+    
+	public Transactions(int transactionId, String transactionType, float transactionAmount, Date transDate,
+			String transFrom, String transTo, long accountId, AccountDetails accountdetails) {
+		super();
+		this.transactionId = transactionId;
+		this.transactionType = transactionType;
+		this.transactionAmount = transactionAmount;
+		this.transDate = transDate;
+		this.transFrom = transFrom;
+		this.transTo = transTo;
+		this.accountId = accountId;
+		this.accountdetails = accountdetails;
+	}
+	
+	
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+	
 	
 	public Date getTransDate() {
 		return transDate;
